@@ -28,23 +28,34 @@ const todoSlice = createSlice({
 				completed: false,
 			};
 			state.push(newTodo);
+			localStorage.setItem(JSON.stringify(Date.now()), JSON.stringify(newTodo));
 		},
-        completedTodo: (state, action) => {
-            // Update the completed state to equal true when checked.
-            const todo = state.find((todo) => todo.id === action.payload);
-            if (todo) {
-                todo.completed = !todo;
-            }
-        },
+		completedTodo: (state, action) => {
+			// Update the completed state to equal true when checked.
+			const todo = state.find((todo) => todo.id === action.payload);
+			if (todo) {
+				todo.completed = !todo;
+			}
+			return todo;
+		},
 		removeTodo: (state, action) => {
-			// Remove todo based on payload
-			return state.filter((todo) => todo.id === action.payload);
+			// Remove todo based on payload.
+			const todo = state.filter((todo) => todo.id !== action.payload);
+
+			return todo;
+		},
+		removeAllTodo: (state) => {
+			// Remove all Todo's by setting it back to an empty array.
+			state = [];
+
+			return state;
 		},
 	},
 });
 
 // Export the generated action creators for use in other components.
-export const { addTodo, completedTodo, removeTodo } = todoSlice.actions; 
+export const { addTodo, completedTodo, removeTodo, removeAllTodo } =
+	todoSlice.actions;
 
-// Export the slice reducer for use in the store configuration. 
+// Export the slice reducer for use in the store configuration.
 export default todoSlice.reducer;

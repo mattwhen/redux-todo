@@ -1,0 +1,25 @@
+.delete-btn {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.delete-btn::before,
+.delete-btn::after {
+  content: '';
+  position: absolute;
+  top: 30%;
+  left: 90%;
+  width: 24px;
+  height: 2px;
+  background-color: red;
+}
+
+
+.delete-btn::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+  
+  .delete-btn::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
